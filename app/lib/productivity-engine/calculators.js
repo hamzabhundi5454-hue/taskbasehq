@@ -1,11 +1,11 @@
 export function calculateLoan(amount, rate, months) {
   const monthlyRate = rate / 100 / 12;
-  const emi =
+  const payment =
     (amount * monthlyRate) /
     (1 - Math.pow(1 + monthlyRate, -months));
 
   return {
-    emi: Math.round(emi),
-    totalPayment: Math.round(emi * months),
+    monthlyPayment: Number(payment.toFixed(2)),
+    totalPayment: Number((payment * months).toFixed(2)),
   };
 }

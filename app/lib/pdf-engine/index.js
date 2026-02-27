@@ -1,7 +1,2 @@
-import repairPdf from "./repair";
-import removeWatermark from "./watermark-remove";
-
-export const pdfEngine = {
-  repair: repairPdf,
-  removeWatermark: removeWatermark,
-};
+import repairPdf from "./repair.js";
+import removeWatermark from "./watermark-remove.js";
