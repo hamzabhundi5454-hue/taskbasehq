@@ -1,4 +1,4 @@
-export function calculateLoan(amount, rate, months) {
+export function calculateLoan({ amount, rate, months }) {
   const monthlyRate = rate / 100 / 12;
   const payment =
     (amount * monthlyRate) /

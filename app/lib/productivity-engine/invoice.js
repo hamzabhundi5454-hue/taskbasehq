@@ -1,7 +1,7 @@
 export function generateInvoice(data) {
   return {
-    invoiceId: `INV-${Date.now()}`,
-    ...data,
+    invoiceId: Date.now(),
     createdAt: new Date().toISOString(),
+    ...data,
   };
 }
