@@ -1,16 +1,21 @@
-import { removeWatermark } from "@/app/lib/pdf-engine/watermark-remove";
+import { NextResponse } from "next/server";
+import { removeWatermark } from "../../lib/pdf-engine/watermark-remove";
 
 export async function POST(req) {
   const formData = await req.formData();
   const file = formData.get("file");
 
-  const buffer = Buffer.from(await file.arrayBuffer());
-  const cleaned = await removeWatermark(buffer);
+  if (!file) {
+    return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
+  }
 
-  return new Response(cleaned, {
+  const buffer = Buffer.from(await file.arrayBuffer());
+  const output = await removeWatermark(buffer);
+
+  return new NextResponse(output, {
     headers: {
       "Content-Type": "application/pdf",
-      "Content-Disposition": `attachment; filename="${file.name.replace(".pdf", "_no_watermark.pdf")}"`
-    }
+      "Content-Disposition": "attachment; filename=watermark-removed.pdf",
+    },
   });
 }

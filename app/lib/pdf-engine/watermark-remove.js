@@ -1,6 +1,6 @@
 import { PDFDocument } from "pdf-lib";
 
-export default async function removeWatermark(fileBuffer) {
+export async function removeWatermark(fileBuffer) {
   const pdfDoc = await PDFDocument.load(fileBuffer);
   const pages = pdfDoc.getPages();
 
