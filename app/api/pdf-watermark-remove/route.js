@@ -10,9 +10,9 @@ export async function POST(req) {
   }
 
   const buffer = Buffer.from(await file.arrayBuffer());
-  const output = await removeWatermark(buffer);
+  const result = await removeWatermark(buffer);
 
-  return new NextResponse(output, {
+  return new NextResponse(result, {
     headers: {
       "Content-Type": "application/pdf",
       "Content-Disposition": "attachment; filename=watermark-removed.pdf",
