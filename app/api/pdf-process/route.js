@@ -1,5 +1,5 @@
 import fs from "fs";
-import { pdfEngine } from "@/app/lib/pdf-engine";
+import { pdfEngine } from "../../lib/pdf-engine/index.js";
 
 export async function POST(req) {
   const data = await req.formData();

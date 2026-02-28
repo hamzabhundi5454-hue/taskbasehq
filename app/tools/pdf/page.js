@@ -1,4 +1,4 @@
-import ToolCard from "@/app/components/ToolCard";
+import ToolCard from "../../components/ToolCard";
 
 export default function PDFToolsPage() {
   const tools = [
