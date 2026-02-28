@@ -1,8 +1,8 @@
 export default function PowerPointToPDF() {
   return (
-    <div>
+    <div style={{ padding: 20 }}>
       <h1>PowerPoint to PDF</h1>
-      <p>Feature coming soon</p>
+      <p>Feature temporarily disabled</p>
     </div>
   );
 }

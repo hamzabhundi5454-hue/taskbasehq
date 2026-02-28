@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 
 export async function POST(req) {
-  const body = await req.json();
+  const data = await req.json();
+
   return NextResponse.json({
     success: true,
-    message: "Resume analyzer placeholder",
-    data: body,
+    message: "Resume analyzer API placeholder",
+    data,
   });
 }
