@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { removeWatermark } from "../../lib/pdf-engine/watermark-remove";
+import { removeWatermark } from "../../../lib/pdf-engine/watermark-remove";
 
 export async function POST(req) {
   const formData = await req.formData();
