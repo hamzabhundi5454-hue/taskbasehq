@@ -42,9 +42,12 @@ export default function PdfToImagePage() {
 
     setLoading(true);
 
-    // ✅ IMPORTANT: Dynamic import inside function
-    const pdfjsLib = await import("pdfjs-dist/build/pdf");
-    await import("pdfjs-dist/build/pdf.worker.entry");
+    // ✅ Dynamic import
+    const pdfjsLib = await import("pdfjs-dist");
+
+    // ✅ Worker via CDN (NO local worker import)
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
 
     const buffer = await file.arrayBuffer();
     const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
