@@ -1,20 +1,15 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
-import * as pdfjsLib from "pdfjs-dist";
+
+export const dynamic = "force-dynamic";
 
 export default function PdfToImagePage() {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const inputRef = useRef(null);
-
-  // ✅ Worker setup (SAFE for Next.js)
-  useEffect(() => {
-    pdfjsLib.GlobalWorkerOptions.workerSrc =
-      `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.js`;
-  }, []);
 
   function handleFile(file) {
     if (!file || file.type !== "application/pdf") {
@@ -47,6 +42,10 @@ export default function PdfToImagePage() {
 
     setLoading(true);
 
+    // ✅ IMPORTANT: Dynamic import inside function
+    const pdfjsLib = await import("pdfjs-dist/build/pdf");
+    await import("pdfjs-dist/build/pdf.worker.entry");
+
     const buffer = await file.arrayBuffer();
     const pdf = await pdfjsLib.getDocument({ data: buffer }).promise;
 
@@ -58,6 +57,7 @@ export default function PdfToImagePage() {
 
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d");
+
       canvas.width = viewport.width;
       canvas.height = viewport.height;
 
@@ -91,7 +91,6 @@ export default function PdfToImagePage() {
         🖼 Each PDF page becomes a separate image
       </div>
 
-      {/* Upload Box */}
       <div
         onDrop={handleDrop}
         onDragOver={(e) => e.preventDefault()}
