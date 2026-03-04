@@ -1,43 +1,55 @@
+import Link from "next/link";
+
+const tools = [
+"pdf-compress",
+"pdf-merge",
+"pdf-split",
+"pdf-delete-pages",
+"pdf-rotate",
+"pdf-reorder",
+"pdf-repair",
+"pdf-metadata",
+"pdf-protect",
+"pdf-unlock",
+"pdf-watermark",
+"pdf-remove-watermark",
+"pdf-to-word",
+"pdf-to-excel",
+"pdf-to-powerpoint",
+"pdf-to-image",
+"pdf-to-pdf",
+"word-to-pdf",
+"excel-to-pdf",
+"powerpoint-to-pdf",
+"image-to-pdf",
+];
+
 export default function ToolsPage() {
-  return (
-    <div style={{ padding: "40px" }}>
-      <h1 style={{ fontSize: "32px", fontWeight: "700" }}>Tools</h1>
+return (
+<main className="p-10">
 
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-          gap: "20px",
-          marginTop: "30px",
-        }}
-      >
-        {/* PDF TOOLS */}
-        <a href="/tools/pdf" style={cardStyle}>
-          <h3>PDF Tools</h3>
-          <p>Merge, split, convert & manage PDFs</p>
-        </a>
+<h1 className="text-3xl font-bold mb-6">
+PDF Tools
+</h1>
 
-        {/* PRODUCTIVITY TOOLS */}
-        <a href="/tools/productivity" style={cardStyle}>
-          <h3>Productivity Tools</h3>
-          <p>Invoices, resumes, calculators & more</p>
-        </a>
+<div className="grid grid-cols-2 md:grid-cols-4 gap-4">
 
-        {/* AI TOOLS — NEW */}
-        <a href="/tools/ai" style={cardStyle}>
-          <h3>AI Tools</h3>
-          <p>Smart AI-powered generators & analyzers</p>
-        </a>
-      </div>
-    </div>
-  );
+{tools.map((tool) => (
+
+<Link
+key={tool}
+href={`/tools/${tool}`}
+className="border p-4 rounded hover:bg-black hover:text-white"
+>
+
+{tool.replaceAll("-", " ").toUpperCase()}
+
+</Link>
+
+))}
+
+</div>
+
+</main>
+);
 }
-
-const cardStyle = {
-  border: "1px solid #e5e7eb",
-  borderRadius: "12px",
-  padding: "20px",
-  textDecoration: "none",
-  color: "#000",
-  background: "#fff",
-};

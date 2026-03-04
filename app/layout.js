@@ -27,11 +27,11 @@ export default function RootLayout({ children }) {
 
               <Link href="/dashboard">Dashboard</Link>
 
-              <Link href="/dashboard">PDF Tools</Link>
+              <Link href="/tools">PDF Tools</Link>
 
-              <Link href="/dashboard">AI Tools</Link>
+              <Link href="/ai">AI Tools</Link>
 
-              <Link href="/dashboard">Calculators</Link>
+              <Link href="/productivity">Calculators</Link>
 
               <Link href="/pricing">Pricing</Link>
 
