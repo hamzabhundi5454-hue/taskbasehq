@@ -1,6 +1,9 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <main className="min-h-screen flex flex-col items-center justify-center p-10">
+      
       <h1 className="text-4xl font-bold mb-4">
         TaskbaseHQ
       </h1>
@@ -11,20 +14,23 @@ export default function Home() {
       </p>
 
       <div className="flex gap-4">
-        <a
+        
+        <Link
           href="/dashboard"
           className="bg-black text-white px-6 py-3 rounded-lg"
         >
           Start Free Trial
-        </a>
+        </Link>
 
-        <a
+        <Link
           href="/pricing"
           className="border px-6 py-3 rounded-lg"
         >
           View Pricing
-        </a>
+        </Link>
+
       </div>
+
     </main>
   );
 }
