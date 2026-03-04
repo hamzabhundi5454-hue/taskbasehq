@@ -1,128 +1,78 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 
-const pdfTools = [
-  "pdf-compress",
-  "pdf-merge",
-  "pdf-split",
-  "pdf-delete-pages",
-  "pdf-rotate",
-  "pdf-reorder",
-  "pdf-repair",
-  "pdf-metadata",
-  "pdf-protect",
-  "pdf-unlock",
-  "pdf-watermark",
-  "pdf-remove-watermark",
-  "pdf-to-word",
-  "pdf-to-excel",
-  "pdf-to-powerpoint",
-  "pdf-to-image",
-  "pdf-to-pdf",
-  "word-to-pdf",
-  "excel-to-pdf",
-  "powerpoint-to-pdf",
-  "image-to-pdf",
+const tools = [
+  { name: "PDF Compress", path: "/tools/pdf-compress" },
+  { name: "PDF Merge", path: "/tools/pdf-merge" },
+  { name: "PDF Split", path: "/tools/pdf-split" },
+  { name: "PDF Rotate", path: "/tools/pdf-rotate" },
+  { name: "PDF Delete Pages", path: "/tools/pdf-delete-pages" },
+  { name: "PDF Reorder", path: "/tools/pdf-reorder" },
+  { name: "PDF Repair", path: "/tools/pdf-repair" },
+  { name: "PDF Protect", path: "/tools/pdf-protect" },
+  { name: "PDF Unlock", path: "/tools/pdf-unlock" },
+  { name: "PDF Watermark", path: "/tools/pdf-watermark" },
+  { name: "Remove Watermark", path: "/tools/pdf-remove-watermark" },
+  { name: "PDF to Word", path: "/tools/pdf-to-word" },
+  { name: "PDF to Excel", path: "/tools/pdf-to-excel" },
+  { name: "PDF to PowerPoint", path: "/tools/pdf-to-powerpoint" },
+  { name: "PDF to Image", path: "/tools/pdf-to-image" },
+
+  { name: "Resume Builder", path: "/ai/resume-builder" },
+  { name: "Resume Analyzer", path: "/ai/resume-analyzer" },
+  { name: "Email Writer", path: "/ai/email-writer" },
+  { name: "Business Name Generator", path: "/ai/business-name-generator" },
+  { name: "Business Idea Generator", path: "/ai/business-idea-generator" },
+  { name: "Product Description Generator", path: "/ai/product-description-generator" },
+
+  { name: "Salary Calculator", path: "/productivity/salary-calculator" },
+  { name: "Loan Calculator", path: "/productivity/loan-calculator" },
+  { name: "GST Tax Calculator", path: "/productivity/gst-tax-calculator" },
+  { name: "Invoice Generator", path: "/productivity/invoice-generator" },
+  { name: "QR Code Generator", path: "/productivity/qr-code-generator" },
 ];
-
-const aiTools = [
-  "resume-builder",
-  "resume-analyzer",
-  "cover-letter-generator",
-  "email-writer",
-  "job-description-generator",
-  "business-name-generator",
-  "business-idea-generator",
-  "product-description-generator",
-  "invoice-assistant",
-  "social-caption-generator",
-];
-
-const productivityTools = [
-  "salary-calculator",
-  "loan-calculator",
-  "gst-tax-calculator",
-  "invoice-generator",
-  "qr-code-generator",
-  "cv-to-pdf",
-  "resume-builder",
-  "resume-analyzer",
-  "cover-letter-generator",
-  "business-name-generator",
-];
-
-function ToolCard({ name, path }) {
-  const label = name
-    .replaceAll("-", " ")
-    .replace(/\b\w/g, (l) => l.toUpperCase());
-
-  return (
-    <Link
-      href={path}
-      className="border rounded-lg p-4 hover:bg-black hover:text-white transition text-center"
-    >
-      {label}
-    </Link>
-  );
-}
 
 export default function Dashboard() {
-  return (
-    <main className="min-h-screen max-w-7xl mx-auto p-10">
+  const [search, setSearch] = useState("");
 
-      <h1 className="text-4xl font-bold mb-10 text-center">
+  const filteredTools = tools.filter((tool) =>
+    tool.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  return (
+    <main className="p-10 max-w-6xl mx-auto">
+
+      <h1 className="text-3xl font-bold mb-6">
         Tools Dashboard
       </h1>
 
-      {/* PDF TOOLS */}
-      <section className="mb-14">
-        <h2 className="text-2xl font-semibold mb-6">
-          PDF Tools
-        </h2>
+      {/* SEARCH BAR */}
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {pdfTools.map((tool) => (
-            <ToolCard
-              key={tool}
-              name={tool}
-              path={`/tools/${tool}`}
-            />
-          ))}
-        </div>
-      </section>
+      <input
+        type="text"
+        placeholder="Search tools..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+        className="w-full border p-3 rounded mb-8"
+      />
 
-      {/* AI TOOLS */}
-      <section className="mb-14">
-        <h2 className="text-2xl font-semibold mb-6">
-          AI Tools
-        </h2>
+      {/* TOOLS GRID */}
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {aiTools.map((tool) => (
-            <ToolCard
-              key={tool}
-              name={tool}
-              path={`/ai/${tool}`}
-            />
-          ))}
-        </div>
-      </section>
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
 
-      {/* PRODUCTIVITY */}
-      <section>
-        <h2 className="text-2xl font-semibold mb-6">
-          Productivity Tools
-        </h2>
+        {filteredTools.map((tool) => (
+          <Link
+            key={tool.name}
+            href={tool.path}
+            className="border p-4 rounded hover:bg-black hover:text-white transition"
+          >
+            {tool.name}
+          </Link>
+        ))}
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {productivityTools.map((tool) => (
-            <ToolCard
-              key={tool}
-              name={tool}
-              path={`/productivity/${tool}`}
-            />
-          ))}
-        </div>
-      </section>
+      </div>
 
     </main>
   );
