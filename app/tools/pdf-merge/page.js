@@ -2,14 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { PDFDocument } from "pdf-lib";
+import UpgradeModal from "@/app/components/UpgradeModal";
 
 export default function MergePDF() {
   const [files, setFiles] = useState([]);
   const [usage, setUsage] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   const isPremiumUser = false;
 
-  // ✅ localStorage safe access
   useEffect(() => {
     const storedUsage = localStorage.getItem("merge_usage") || 0;
     setUsage(Number(storedUsage));
@@ -21,7 +22,7 @@ export default function MergePDF() {
 
   const mergePDFs = async () => {
     if (!isPremiumUser && usage >= 3) {
-      alert("Free limit reached. Upgrade to Pro 🚀");
+      setShowModal(true); // 🔥 popup open
       return;
     }
 
@@ -41,7 +42,6 @@ export default function MergePDF() {
 
     const mergedBytes = await mergedPdf.save();
 
-    // ✅ update usage
     const newUsage = usage + 1;
     localStorage.setItem("merge_usage", newUsage);
     setUsage(newUsage);
@@ -80,6 +80,12 @@ export default function MergePDF() {
       >
         Merge PDFs
       </button>
+
+      {/* 🔥 PREMIUM POPUP */}
+      <UpgradeModal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+      />
 
     </main>
   );

@@ -1,30 +1,37 @@
 "use client";
 
-export default function UpgradeModal({ onClose }) {
+export default function UpgradeModal({ show, onClose }) {
+  if (!show) return null;
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-white p-8 rounded-xl max-w-md w-full">
-        <h2 className="text-2xl font-bold mb-4">
-          Upgrade to Premium
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
+
+      <div className="bg-white p-6 rounded-xl w-80 text-center">
+
+        <h2 className="text-xl font-bold mb-3">
+          Upgrade Required 🚀
         </h2>
 
-        <ul className="space-y-2 text-sm mb-6">
-          <li>✔ Unlimited Invoice Downloads</li>
-          <li>✔ Resume Builder & Analyzer</li>
-          <li>✔ PDF Repair & AI Tools</li>
-          <li>✔ No Watermark</li>
-        </ul>
+        <p className="text-gray-500 mb-4">
+          You’ve reached your free limit. Upgrade to continue using this tool.
+        </p>
 
-        <button className="w-full bg-purple-600 text-white py-3 rounded-lg mb-2">
-          Upgrade Now
-        </button>
+        <div className="flex gap-3 justify-center">
+          <a
+            href="/pricing"
+            className="bg-black text-white px-4 py-2 rounded"
+          >
+            Upgrade
+          </a>
 
-        <button
-          onClick={onClose}
-          className="w-full text-gray-500 text-sm"
-        >
-          Maybe later
-        </button>
+          <button
+            onClick={onClose}
+            className="border px-4 py-2 rounded"
+          >
+            Cancel
+          </button>
+        </div>
+
       </div>
     </div>
   );
