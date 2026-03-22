@@ -1,81 +1,55 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 
 export default function Dashboard() {
-  const [search, setSearch] = useState("");
-
-  // ✅ ALL PDF TOOLS (21)
   const pdfTools = [
-    "excel-to-pdf","image-to-pdf","pdf-compress","pdf-delete-pages","pdf-merge",
-    "pdf-metadata","pdf-protect","pdf-remove-watermark","pdf-reorder","pdf-repair",
-    "pdf-rotate","pdf-split","pdf-to-excel","pdf-to-image","pdf-to-powerpoint",
-    "pdf-to-word","pdf-unlock","pdf-watermark","powerpoint-to-pdf","word-to-pdf"
+    "pdf-compress","pdf-merge","pdf-split","pdf-rotate","pdf-delete-pages",
+    "pdf-to-word","pdf-to-excel","pdf-to-image"
   ];
 
-  // ✅ ALL AI TOOLS (10)
   const aiTools = [
-    "business-idea-generator","business-name-generator","cover-letter-generator",
-    "email-writer","invoice-assistant","job-description-generator",
-    "product-description-generator","resume-analyzer","resume-builder",
-    "social-caption-generator"
+    "resume-builder","email-writer","business-name-generator","resume-analyzer"
   ];
 
-  // ✅ ALL PRODUCTIVITY TOOLS (10)
-  const productivityTools = [
-    "business-name-generator","cover-letter-generator","cv-to-pdf",
-    "gst-tax-calculator","invoice-generator","loan-calculator",
-    "qr-code-generator","resume-analyzer","resume-builder","salary-calculator"
+  const smartTools = [
+    "salary-calculator","loan-calculator","gst-tax-calculator","invoice-generator"
   ];
-
-  const filterTools = (tools) =>
-    tools.filter((tool) =>
-      tool.toLowerCase().includes(search.toLowerCase())
-    );
 
   return (
     <main className="p-6 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6">All Tools Dashboard</h1>
 
-      {/* SEARCH */}
-      <input
-        type="text"
-        placeholder="Search any tool..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="w-full border px-4 py-3 rounded-xl mb-8"
-      />
+      <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
 
-      {/* PDF TOOLS */}
-      <h2 className="text-xl font-semibold mb-3">📄 PDF Tools</h2>
-      <div className="grid grid-cols-3 gap-5 mb-8">
-        {filterTools(pdfTools).map((tool) => (
-          <Link key={tool} href={`/tools/${tool}`} className="card">
-            {tool.replaceAll("-", " ")}
-          </Link>
-        ))}
-      </div>
+      {/* PDF */}
+      <Section title="📄 PDF Tools" tools={pdfTools} base="/tools" />
 
-      {/* AI TOOLS */}
-      <h2 className="text-xl font-semibold mb-3">🤖 AI Tools</h2>
-      <div className="grid grid-cols-3 gap-5 mb-8">
-        {filterTools(aiTools).map((tool) => (
-          <Link key={tool} href={`/ai/${tool}`} className="card">
-            {tool.replaceAll("-", " ")}
-          </Link>
-        ))}
-      </div>
+      {/* AI */}
+      <Section title="🤖 AI Tools" tools={aiTools} base="/ai" />
 
-      {/* PRODUCTIVITY */}
-      <h2 className="text-xl font-semibold mb-3">⚡ Smart Tools</h2>
-      <div className="grid grid-cols-3 gap-5">
-        {filterTools(productivityTools).map((tool) => (
-          <Link key={tool} href={`/productivity/${tool}`} className="card">
-            {tool.replaceAll("-", " ")}
-          </Link>
-        ))}
-      </div>
+      {/* SMART */}
+      <Section title="⚡ Smart Tools" tools={smartTools} base="/productivity" />
+
     </main>
+  );
+}
+
+function Section({ title, tools, base }) {
+  return (
+    <div className="mb-8">
+      <h2 className="font-semibold mb-3">{title}</h2>
+
+      <div className="grid grid-cols-4 gap-4">
+        {tools.map((tool) => (
+          <Link
+            key={tool}
+            href={`${base}/${tool}`}
+            className="card text-sm"
+          >
+            {tool.replaceAll("-", " ")}
+          </Link>
+        ))}
+      </div>
+    </div>
   );
 }
