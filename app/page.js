@@ -11,21 +11,15 @@ export default function Home() {
         </h1>
 
         <p className="text-lg text-gray-600 mb-8">
-          Convert PDFs, use AI tools, and access smart calculators — all in one place.
+          Convert PDFs, use AI tools, and access smart utilities — all in one place.
         </p>
 
         <div className="flex justify-center gap-4">
-          <Link
-            href="/dashboard"
-            className="bg-black text-white px-6 py-3 rounded-lg"
-          >
+          <Link href="/dashboard" className="bg-black text-white px-6 py-3 rounded-lg">
             Open Dashboard
           </Link>
 
-          <Link
-            href="/pricing"
-            className="border px-6 py-3 rounded-lg"
-          >
+          <Link href="/pricing" className="border px-6 py-3 rounded-lg">
             View Pricing
           </Link>
         </div>
@@ -33,21 +27,21 @@ export default function Home() {
 
       {/* FEATURES */}
       <div className="grid grid-cols-3 gap-6 mt-16 max-w-4xl w-full">
-        
-        <div className="card text-center">
+
+        <Link href="/tools" className="card text-center">
           <h3 className="font-semibold text-lg mb-2">📄 PDF Tools</h3>
           <p className="text-sm text-gray-500">Merge, compress, convert PDFs</p>
-        </div>
+        </Link>
 
-        <div className="card text-center">
+        <Link href="/ai" className="card text-center">
           <h3 className="font-semibold text-lg mb-2">🤖 AI Tools</h3>
           <p className="text-sm text-gray-500">Generate content instantly</p>
-        </div>
+        </Link>
 
-        <div className="card text-center">
+        <Link href="/productivity" className="card text-center">
           <h3 className="font-semibold text-lg mb-2">⚡ Smart Tools</h3>
           <p className="text-sm text-gray-500">Fast calculators & utilities</p>
-        </div>
+        </Link>
 
       </div>
     </main>

@@ -3,17 +3,25 @@
 import Link from "next/link";
 
 export default function Dashboard() {
+
   const pdfTools = [
-    "pdf-compress","pdf-merge","pdf-split","pdf-rotate","pdf-delete-pages",
-    "pdf-to-word","pdf-to-excel","pdf-to-image"
+    "excel-to-pdf","image-to-pdf","pdf-compress","pdf-delete-pages","pdf-merge",
+    "pdf-metadata","pdf-protect","pdf-remove-watermark","pdf-reorder","pdf-repair",
+    "pdf-rotate","pdf-split","pdf-to-excel","pdf-to-image","pdf-to-powerpoint",
+    "pdf-to-word","pdf-unlock","pdf-watermark","powerpoint-to-pdf","word-to-pdf"
   ];
 
   const aiTools = [
-    "resume-builder","email-writer","business-name-generator","resume-analyzer"
+    "business-idea-generator","business-name-generator","cover-letter-generator",
+    "email-writer","invoice-assistant","job-description-generator",
+    "product-description-generator","resume-analyzer","resume-builder",
+    "social-caption-generator"
   ];
 
   const smartTools = [
-    "salary-calculator","loan-calculator","gst-tax-calculator","invoice-generator"
+    "business-name-generator","cover-letter-generator","cv-to-pdf",
+    "gst-tax-calculator","invoice-generator","loan-calculator",
+    "qr-code-generator","resume-analyzer","resume-builder","salary-calculator"
   ];
 
   return (
@@ -21,13 +29,8 @@ export default function Dashboard() {
 
       <h1 className="text-2xl font-bold mb-6">Dashboard</h1>
 
-      {/* PDF */}
       <Section title="📄 PDF Tools" tools={pdfTools} base="/tools" />
-
-      {/* AI */}
       <Section title="🤖 AI Tools" tools={aiTools} base="/ai" />
-
-      {/* SMART */}
       <Section title="⚡ Smart Tools" tools={smartTools} base="/productivity" />
 
     </main>
