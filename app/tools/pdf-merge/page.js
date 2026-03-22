@@ -1,15 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PDFDocument } from "pdf-lib";
 
 export default function MergePDF() {
   const [files, setFiles] = useState([]);
-
-  // 🔒 FREE LIMIT SYSTEM
-  let usage = localStorage.getItem("merge_usage") || 0;
+  const [usage, setUsage] = useState(0);
 
   const isPremiumUser = false;
+
+  // ✅ localStorage safe access
+  useEffect(() => {
+    const storedUsage = localStorage.getItem("merge_usage") || 0;
+    setUsage(Number(storedUsage));
+  }, []);
 
   const handleUpload = (e) => {
     setFiles(Array.from(e.target.files));
@@ -37,8 +41,10 @@ export default function MergePDF() {
 
     const mergedBytes = await mergedPdf.save();
 
-    // 🔥 increase usage
-    localStorage.setItem("merge_usage", Number(usage) + 1);
+    // ✅ update usage
+    const newUsage = usage + 1;
+    localStorage.setItem("merge_usage", newUsage);
+    setUsage(newUsage);
 
     const blob = new Blob([mergedBytes], { type: "application/pdf" });
     const url = URL.createObjectURL(blob);
@@ -56,11 +62,17 @@ export default function MergePDF() {
 
       {!isPremiumUser && (
         <p className="text-red-500 mb-2">
-          Free limit: 3 uses/day
+          Free limit: 3 uses
         </p>
       )}
 
-      <input type="file" multiple onChange={handleUpload} className="mb-4" />
+      <input
+        type="file"
+        multiple
+        accept="application/pdf"
+        onChange={handleUpload}
+        className="mb-4"
+      />
 
       <button
         onClick={mergePDFs}
