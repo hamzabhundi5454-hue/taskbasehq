@@ -6,33 +6,27 @@ import { useState } from "react";
 export default function Dashboard() {
   const [search, setSearch] = useState("");
 
+  // ✅ ALL PDF TOOLS (21)
   const pdfTools = [
-    "compress-pdf",
-    "merge-pdf",
-    "split-pdf",
-    "rotate-pdf",
-    "delete-pages",
-    "remove-watermark",
-    "pdf-to-word",
-    "pdf-to-excel",
-    "pdf-to-image",
+    "excel-to-pdf","image-to-pdf","pdf-compress","pdf-delete-pages","pdf-merge",
+    "pdf-metadata","pdf-protect","pdf-remove-watermark","pdf-reorder","pdf-repair",
+    "pdf-rotate","pdf-split","pdf-to-excel","pdf-to-image","pdf-to-powerpoint",
+    "pdf-to-word","pdf-unlock","pdf-watermark","powerpoint-to-pdf","word-to-pdf"
   ];
 
+  // ✅ ALL AI TOOLS (10)
   const aiTools = [
-    "resume-builder",
-    "resume-analyzer",
-    "email-writer",
-    "business-name-generator",
-    "business-idea-generator",
-    "product-description-generator",
+    "business-idea-generator","business-name-generator","cover-letter-generator",
+    "email-writer","invoice-assistant","job-description-generator",
+    "product-description-generator","resume-analyzer","resume-builder",
+    "social-caption-generator"
   ];
 
-  const calculatorTools = [
-    "salary-calculator",
-    "loan-calculator",
-    "gst-tax-calculator",
-    "invoice-generator",
-    "qr-code-generator",
+  // ✅ ALL PRODUCTIVITY TOOLS (10)
+  const productivityTools = [
+    "business-name-generator","cover-letter-generator","cv-to-pdf",
+    "gst-tax-calculator","invoice-generator","loan-calculator",
+    "qr-code-generator","resume-analyzer","resume-builder","salary-calculator"
   ];
 
   const filterTools = (tools) =>
@@ -41,55 +35,43 @@ export default function Dashboard() {
     );
 
   return (
-    <main className="p-6">
-      <h1 className="text-2xl font-bold mb-4">Tools Dashboard</h1>
+    <main className="p-6 bg-gray-50 min-h-screen">
+      <h1 className="text-3xl font-bold mb-6">All Tools Dashboard</h1>
 
       {/* SEARCH */}
       <input
         type="text"
-        placeholder="Search tools..."
+        placeholder="Search any tool..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
-        className="w-full border px-4 py-2 rounded-lg mb-6"
+        className="w-full border px-4 py-3 rounded-xl mb-8"
       />
 
       {/* PDF TOOLS */}
-      <h2 className="font-semibold mb-2">PDF Tools</h2>
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <h2 className="text-xl font-semibold mb-3">📄 PDF Tools</h2>
+      <div className="grid grid-cols-3 gap-5 mb-8">
         {filterTools(pdfTools).map((tool) => (
-          <Link
-            key={tool}
-            href={`/tools/${tool}`}
-            className="border p-4 rounded hover:shadow"
-          >
+          <Link key={tool} href={`/tools/${tool}`} className="card">
             {tool.replaceAll("-", " ")}
           </Link>
         ))}
       </div>
 
       {/* AI TOOLS */}
-      <h2 className="font-semibold mb-2">AI Tools</h2>
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <h2 className="text-xl font-semibold mb-3">🤖 AI Tools</h2>
+      <div className="grid grid-cols-3 gap-5 mb-8">
         {filterTools(aiTools).map((tool) => (
-          <Link
-            key={tool}
-            href={`/ai/${tool}`}
-            className="border p-4 rounded hover:shadow"
-          >
+          <Link key={tool} href={`/ai/${tool}`} className="card">
             {tool.replaceAll("-", " ")}
           </Link>
         ))}
       </div>
 
-      {/* CALCULATORS */}
-      <h2 className="font-semibold mb-2">Calculators</h2>
-      <div className="grid grid-cols-3 gap-4">
-        {filterTools(calculatorTools).map((tool) => (
-          <Link
-            key={tool}
-            href={`/productivity/${tool}`}
-            className="border p-4 rounded hover:shadow"
-          >
+      {/* PRODUCTIVITY */}
+      <h2 className="text-xl font-semibold mb-3">⚡ Smart Tools</h2>
+      <div className="grid grid-cols-3 gap-5">
+        {filterTools(productivityTools).map((tool) => (
+          <Link key={tool} href={`/productivity/${tool}`} className="card">
             {tool.replaceAll("-", " ")}
           </Link>
         ))}
